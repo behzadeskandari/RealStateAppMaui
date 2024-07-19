@@ -71,7 +71,7 @@ namespace RealStateApp.Services
             return JsonConvert.DeserializeObject<List<Category>>(response);
         }
 
-        public static async Task<List<TrendingProperty>> GetTrendingCategories()
+        public static async Task<List<TrendingProperty>> GetTrendingProperties()
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
@@ -84,7 +84,7 @@ namespace RealStateApp.Services
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
-            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/SearchProperties?address" + address);
+            var response = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}api/Properties/SearchProperties?address={address}");
             return JsonConvert.DeserializeObject<List<SearchProperty>>(response);
         }
 
@@ -92,20 +92,20 @@ namespace RealStateApp.Services
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
-            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/PropertyList?categoryId" + categoryId);
+            var response = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}api/Properties/PropertyList?categoryId={categoryId}");
             return JsonConvert.DeserializeObject<List<PropertyByCategory>>(response);
         }
 
-        public static async Task<List<PropertyDetail>> GetPropertyDetail(int propertyId)
+        public static async Task<PropertyDetail> GetPropertyDetail(int propertyId)
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
-            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/PropertyDetail?id" + propertyId);
-            return JsonConvert.DeserializeObject<List<PropertyDetail>>(response);
+            var response = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}api/Properties/PropertyDetail?id={propertyId}");
+            return JsonConvert.DeserializeObject<PropertyDetail>(response);
         }
 
 
-        public static async Task<List<BookmarkList>> GetBookmarkList(int propertyId)
+        public static async Task<List<BookmarkList>> GetBookmarkList()
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
@@ -135,6 +135,6 @@ namespace RealStateApp.Services
             return true;
         }
 
-
+    
     }
 }

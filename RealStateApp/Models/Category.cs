@@ -16,6 +16,10 @@ namespace RealStateApp.Models
         
         [JsonProperty("imageUrl")]
         public string ImageUrl { get; set; }
+
+
+
+        public string FullImageUrl => AppSettings.ApiUrl + ImageUrl;
         
         [JsonProperty("properties")]
         public string Properties { get; set; }

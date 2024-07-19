@@ -21,6 +21,8 @@ namespace RealStateApp.Models
         [JsonProperty("imageUrl")]
         public string ImageUrl { get; set; }
 
+        public string FullImageUrl => AppSettings.ApiUrl + ImageUrl;
+        
         [JsonProperty("address")]
         public string Address { get; set; }
 
@@ -28,9 +30,9 @@ namespace RealStateApp.Models
         public bool Status { get; set; }
 
         [JsonProperty("user_Id")]
-        public bool UserId { get; set; }
+        public int UserId { get; set; }
 
         [JsonProperty("propertyId")]
-        public bool PropertyId { get; set; }
+        public int PropertyId { get; set; }
     }
 }
